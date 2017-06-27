@@ -14,11 +14,11 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
 Auth::routes();
 
-Route::post('/threads', 'ThreadsController@store');
-Route::get('/threads', 'ThreadsController@index');
-Route::get('/threads/{thread}', 'ThreadsController@show');
+Route::get('/home', 'HomeController@index')->name('home');
+
+Route::resource('threads', 'ThreadsController');
 Route::post('threads/{thread}/replies', 'RepliesController@store');
 
-Route::get('/home', 'HomeController@index')->name('home');
