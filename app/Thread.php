@@ -38,4 +38,12 @@ class Thread extends Model
     {
         return $filters->apply($query);
     }
+
+    public static function boot(){
+        parent::boot();
+
+        static::addGlobalScope('replyCount' , function($builder){
+            $builder->withCount('replies');
+        });
+    }
 }
