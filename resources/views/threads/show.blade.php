@@ -15,6 +15,29 @@
                         {{ $thread->body }}
                     @endslot
                 @endcomponent
+
+                    <section id="comments">
+                        @foreach($replies as $reply)
+                            @include('threads.reply')
+                        @endforeach
+                    </section>
+
+                {{ $replies->links() }}
+
+                @if(auth()->check())
+                    <form method="POST" action="{{ $thread->path() . '/replies' }}">
+                        {{ csrf_field() }}
+                        <div class="form-group">
+                            <textarea class="form-control" name="body" rows="5"
+                                      placeholder="Have something to say?"></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-default">Post</button>
+                    </form>
+                @else
+                    <p class="text-center">Please <a href="{{ route('login') }}">sign in</a> to participate in this discussion.
+                    </p>
+                @endif
+
             </div>
             <div class="col-md-4">
                 @component('components.panel-without-heading')
@@ -29,37 +52,6 @@
             </div>
 
         </div>
-
-        <div class="row">
-            <div class="col-md-8 col-md-offset-2">
-
-                @foreach($replies as $reply)
-                    @include('threads.reply')
-                @endforeach
-
-                {{ $replies->links() }}
-
-            </div>
-        </div>
-
-        @if(auth()->check())
-            <div class="row">
-                <div class="col-md-8 col-md-offset-2">
-                    <form method="POST" action="{{ $thread->path() . '/replies' }}">
-                        {{ csrf_field() }}
-                        <div class="form-group">
-                            <textarea class="form-control" name="body" rows="5"
-                              placeholder="Have something to say?">
-                            </textarea>
-                        </div>
-                        <button type="submit" class="btn btn-default">Post</button>
-                    </form>
-                </div>
-            </div>
-        @else
-            <p class="text-center">Please <a href="{{ route('login') }}">sign in</a> to participate in this discussion.
-            </p>
-        @endif
 
     </div>
 @endsection
