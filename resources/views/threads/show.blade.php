@@ -6,7 +6,7 @@
             <div class="col-md-8">
                 @component('components.panel')
                     @slot('heading')
-                        <a href="#">{{ $thread->creator->name }}</a>
+                        <a href="{{ route('profile', $thread->creator) }}">{{ $thread->creator->name }}</a>
                         posted :
                         {{ $thread->title }}
                     @endslot
