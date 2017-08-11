@@ -22,6 +22,7 @@ Route::get('threads', ['uses' => 'ThreadsController@index']);
 Route::get('threads/create', ['uses' => 'ThreadsController@create']);
 Route::get('threads/{channel}', ['uses' => 'ThreadsController@index']);
 Route::get('threads/{channel}/{thread}', ['uses' => 'ThreadsController@show']);
+Route::delete('threads/{channel}/{thread}', ['uses' => 'ThreadsController@destroy']);
 Route::post('threads', ['uses' => 'ThreadsController@store']);
 Route::post('threads/{channel}/{thread}/replies', 'RepliesController@store');
 Route::post('replies/{reply}/favorites', 'FavoritesController@store');
