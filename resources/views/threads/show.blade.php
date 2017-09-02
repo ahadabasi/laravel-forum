@@ -6,9 +6,20 @@
             <div class="col-md-8">
                 @component('components.panel')
                     @slot('heading')
-                        <a href="{{ route('profile', $thread->creator) }}">{{ $thread->creator->name }}</a>
-                        posted :
-                        {{ $thread->title }}
+                        <div class="level">
+                            <span class="flex">
+                                <a href="{{ route('profile', $thread->creator) }}">{{ $thread->creator->name }}</a>
+                                posted :
+                                {{ $thread->title }}
+                            </span>
+                            @if(auth()->check())
+                                <form action="{{ $thread->path() }}" method="POST">
+                                    {{ csrf_field() }}
+                                    {{ method_field('DELETE') }}
+                                    <button type="submit" class="btn btn-link">Delete Thread</button>
+                                </form>
+                            @endif
+                        </div>
                     @endslot
 
                     @slot('body')
