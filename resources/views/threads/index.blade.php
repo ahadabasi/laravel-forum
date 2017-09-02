@@ -5,7 +5,7 @@
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
 
-                @foreach($threads as $thread)
+                @forelse($threads as $thread)
                     @component('components.panel')
                         @slot('heading')
                             <div class="level">
@@ -24,7 +24,9 @@
                             {{ $thread->body }}
                         @endslot
                     @endcomponent
-                @endforeach
+                @empty
+                    <p>There are no relevant results at this time.</p>
+                @endforelse
 
             </div>
         </div>
