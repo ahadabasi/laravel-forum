@@ -78,7 +78,6 @@ class CreateThreadTest extends TestCase
     {
         $this->withExceptionHandling();
         $thread = create('App\Thread');
-        dd($thread->path());
         $this->delete($thread->path())
             ->assertRedirect('/login');
     }
